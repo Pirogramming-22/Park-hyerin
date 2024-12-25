@@ -183,10 +183,53 @@
             <div id="search"></div>
             <style>
                 #search > form{
+                    display: inline-flex;
                     width: 708;
                     height: 60;
                     border: 1px solid #03c75a;
                     border-radius: 33px;
+                    text-align: left;
+                }
+                #search-right{
+                    flex: 1;
+                    display: flex;
+                    align-items: stretch;
+                    justify-content: flex-end;
+                }
+                #search-keyboard, #search-recent, #search-button{
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                }
+                #search-keyboard::before{
+                    content: "";
+                    display: inline-flex;
+                    background-image: url(https://pm.pstatic.net/resources/asset/sp_main.eae24523.png);
+                    background-size: 452px 436px;
+                    background-position: -148px -301px;
+                    background-repeat: no-repeat;
+                    width: 24px;
+                    height: 14px;
+                }
+                #search-recent::before{
+                    content: "";
+                    display: inline-flex;
+                    background-image: url(https://pm.pstatic.net/resources/asset/sp_main.eae24523.png);
+                    background-size: 452px 436px;
+                    background-position: -154px -211px;
+                    background-repeat: no-repeat;
+                    width: 10px;
+                    height: 6px;
+                }
+               #search-button::before{
+                    content: "";
+                    display: inline-flex;
+                    background-image: url(https://pm.pstatic.net/resources/asset/sp_main.eae24523.png);
+                    background-size: 452px 436px;
+                    background-position: -405px -79px;
+                    background-repeat: no-repeat;
+                    width: 25px;
+                    height: 25px;
                 }
             </style>
             <div id="search">
