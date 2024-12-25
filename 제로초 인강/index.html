@@ -86,7 +86,6 @@
         #wrap-center{
             width: 1280px;
             display: inline-block;
-            background-color: yellow;
         }
         #header{
             text-align: left;
@@ -191,6 +190,9 @@
                     border-radius: 33px;
                     text-align: left;
                 }
+                #search > form:hover{
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12);
+                }
                 #search > form > input{
                     width: 480px;
                     padding: 17px 0;
@@ -213,6 +215,12 @@
                     width: 24px;
                     height: 24px;
                 }
+                #search-input::placeholder{
+                    color: white;
+                }
+                #search-input:focus::placeholder{
+                    color: #e4e4e4;
+                }
                 #search-right{
                     flex: 1;
                     display: flex;
@@ -234,6 +242,9 @@
                     width: 24px;
                     height: 14px;
                 }
+                #search-keyboard:hover::before{
+                    filter: brightness(0.7)
+                }
                 #search-recent::before{
                     content: "";
                     display: inline-flex;
@@ -244,16 +255,25 @@
                     width: 10px;
                     height: 6px;
                 }
-               #search-button::before{
-                    content: "";
-                    display: inline-flex;
-                    background-image: url(https://pm.pstatic.net/resources/asset/sp_main.eae24523.png);
-                    background-size: 452px 436px;
-                    background-position: -405px -79px;
-                    background-repeat: no-repeat;
+                #search-button{
+                    padding: 17px 27px 16px 10px ;
+
+                }
+                #search-button > div{
+                    background: #03c75a;
                     width: 25px;
                     height: 25px;
                 }
+                #search-button > div::before{
+                        content: "";
+                        display: inline-flex;
+                        background-image: url(https://pm.pstatic.net/resources/asset/sp_main.eae24523.png);
+                        background-size: 452px 436px;
+                        background-position: -405px -79px;
+                        background-repeat: no-repeat;
+                        width: 25px;
+                        height: 25px;
+                    }
     
             </style>
             <div id="search">
