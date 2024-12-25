@@ -10,7 +10,7 @@
             height: 100vh;
             margin: 0;
         }
-        #wrap-top {
+        #top {
             flex: 4.5; 
             background-color: #2B3137;
             position: relative; 
@@ -71,25 +71,55 @@
         .auth-links:hover {
             text-decoration: underline;
         }
+        #content {
+            margin: -10px -700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            height: 100%; 
+            font-family: Arial, sans-serif;
+        }
+        #content h1 {
+            font-size: 200px;
+            margin-bottom: -210px;
+            font-weight: bold;
+            color: white;
+        }
+        #content h2 {
+            font-size: 200px;
+            margin-bottom: -30px;
+            font-weight: bold;
+            color: white;
+        }
+        #content p {
+            font-size: 55px;
+            color: #979A9D;
+            margin-bottom: -30px;
+        }
+        .highlight {
+            font-weight: bold;
+            text-decoration: underline;
+            color: white
+        }
         footer {
-            flex: 1; 
-            background-color: white;
-            position: relative; 
+                flex: 1; 
+                background-color: white;
+                position: relative; 
         }
         footer img {
-            position: absolute;
-            width: 1400px;
-            bottom: -76px; 
-            right: 330px;
-            z-index: 10; 
-            height: auto;
+                position: absolute;
+                width: 1400px;
+                bottom: -76px; 
+                right: 330px;
+                z-index: 10; 
+                height: auto; 
         }
 
     </style>
 </head>
 <body>
     <div id="wrap">
-        <div id="wrap-top">
+        <div id="top">
             <div id="top-left">
                 <a class="AppHeader-logo ml-1" href="https://github.com/" 
                     data-hotkey="g d" 
@@ -112,12 +142,18 @@
                 <a href="#" class="auth-links">Sign in</a>
                 <a href="#" class="auth-links">Sign up</a>
             </div>
+            <div id="content">
+                <h1>Built for</h1>
+                <h2>developers</h2>
+                <p>GitHub is a development platform inspired by the</p>
+                <p>way you work. From <span class="highlight">open source</span> to <span class="highlight">business</span>, you can</p>
+                <p>host and review code, manage projects, and<br>
+                <p>build software alongside 50 million developers.</p>
+            </div>
         </div>
-        <middle></middle>
         <footer>
             <img src="footer.png" alt="캐릭터 이미지">
         </footer>
     </div>
-
 </body>
 </html>
