@@ -24,7 +24,7 @@
             display: flex;
             align-items: center;
             gap: 40px;
-            padding: 50px 250px;
+            padding: 50px 350px;
         }
         #top-left svg {
             display: inline-flex;
@@ -48,10 +48,10 @@
             display: flex;
             align-items: center;
             gap: 40px;
-            padding: 50px 250px;
+            padding: 50px 350px;
         }
         .search-bar {
-            background-color: rgba(255, 255, 255, 0.2); 
+            background-color: rgba(255, 255, 255, 0.1); 
             border: none;
             border-radius: 10px;
             padding: 10px 35px;
@@ -67,12 +67,15 @@
             color: white;
             font-size: 40px;
             text-decoration: none;
+            padding: 15px 25px; 
+            border-radius: 15px; 
         }
         .auth-links:hover {
-            text-decoration: underline;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background-color: transparent;
         }
         #content {
-            margin: -10px -700px;
+            margin: -7px -1300px;
             display: flex;
             flex-direction: column;
             justify-content: center; 
@@ -98,8 +101,10 @@
         }
         .highlight {
             font-weight: bold;
-            text-decoration: underline;
-            color: white
+            color: white;
+            text-decoration: none;  
+            border-bottom: 4px solid rgba(255, 255, 255, 0.1);  
+            padding-bottom: 0.1px;
         }
         footer {
                 flex: 1; 
@@ -146,8 +151,8 @@
                 <h1>Built for</h1>
                 <h2>developers</h2>
                 <p>GitHub is a development platform inspired by the</p>
-                <p>way you work. From <span class="highlight">open source</span> to <span class="highlight">business</span>, you can</p>
-                <p>host and review code, manage projects, and<br>
+                <p>way you work. From <span class="highlight">open source</span> to <span class="highlight">business</span>, you</p>
+                <p>can host and review code, manage projects, and<br>
                 <p>build software alongside 50 million developers.</p>
             </div>
         </div>
