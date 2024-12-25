@@ -72,6 +72,9 @@
                 --color_shop: #9858f5;
                 --color_shop_rgb: 152, 88, 245;
         }
+        *{
+            box-sizing: border-box; 
+        }
         html, body{
             margin: 0;
             padding: 0;
@@ -88,8 +91,7 @@
             text-align: left;
             position: relative;
         }
-        #header-hamburger{
-            margin-top: 18px;
+        #header-hamburger, #header-naverpay, #header-notice{
             position: absolute;
             top: 18px;
             left: -10px;
@@ -99,25 +101,46 @@
             border: none;
             cursor: pointer;
         }
-        #header-hamburger:hover::before{
+        #header-hamburger:hover::before, #header-naverpayr:hover::before, #header-notice:hover::before{
             position: absolute;
             content: "";
             z-index: 0;
-            left: 1px;
-            top: 1px;
-            width: 44px;
-            height: 44px;
             background-color: var(--color_option_bg);
             border-radius: 50%;
         }
-        #header-hamburger > div{
+        #header-hamburger > div, #header-naverpay > div, #header-notice > div{
             background-image: url(./sp_main.png);
             width: 26px;
             height: 26px;
             z-index: 1;
-            background-position: -284px -155px;
+            position: relative;
             background-repeat: no-repeat;
             background-size: 420px 405px;
+        }
+        #header-hamburger{
+            left: -10px;
+        }
+        #header-hamburger > div{
+            width: 26px;
+            height: 26px;
+            background-position: -284px -155px;
+        }
+        #header-naverpay{
+            right: 42px;
+            padding: 10px 8px;
+        }
+        #header-naverpay > div{
+            width: 30px;
+            height: 30px;
+            background-position: -224px -239px;
+        }
+        #header-notice{
+            right: -10px;
+        }
+        #header-notice > div{
+            width: 26px;
+            height: 26px;
+            background-position: -285px -216px;
         }
         #main{
             height: 2000px;
@@ -140,6 +163,18 @@
                     <!--::before-->
                     <div></div>
                     <span class="blind">확장 영역</span>
+                    <!--::after-->
+                </button>
+                <button id="header-naverpay">
+                    <!--::before-->
+                    <div></div>
+                    <span class="blind">네이버 페이</span>
+                    <!--::after-->
+                </button>
+                <button id="header-notice">
+                    <!--::before-->
+                    <div></div>
+                    <span class="blind">알림</span>
                     <!--::after-->
                 </button>
             </div>
