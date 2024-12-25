@@ -193,15 +193,6 @@
                 #search > form:hover{
                     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12);
                 }
-                #search > form > input{
-                    width: 480px;
-                    padding: 17px 0;
-                    font-size: 2rem;
-                    line-height: 24px;
-                    font-weight: bold;
-                    border: none;
-                    outline: none;
-                }
                 #search-svg{
                     display: inline-flex;
                     justify-content: center;
@@ -210,10 +201,34 @@
                     margin-right: 12px;
                     height: 100%;
                     padding-left: 10px;
+                    position: relative;
+                }
+                #search-svg::after{
+                    display: none;
+                }
+                #search > form:focus-within #search-svg::after{
+                    position:absolute;
+                    content: '';
+                    width: 1px;
+                    height: 20px;
+                    background-color: #e4e4e4;
+                    right: 0;
+                    top: 20px;
+                    display: inline-block;
                 }
                 #search-svg svg{
                     width: 24px;
                     height: 24px;
+                    fill: #03c75a
+                }
+                #search-input{
+                    width: 480px;
+                    padding: 17px 0;
+                    font-size: 2rem;
+                    line-height: 24px;
+                    font-weight: bold;
+                    border: none;
+                    outline: none;
                 }
                 #search-input::placeholder{
                     color: white;
