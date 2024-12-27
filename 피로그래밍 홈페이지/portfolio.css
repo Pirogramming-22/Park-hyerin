@@ -40,6 +40,7 @@ html{
     font-size: 62.5% !important;
 }
 body {
+    font-size: 11px;
     line-height: 1;
     font-family: "Nexon", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     overflow-x: hidden;
@@ -116,11 +117,7 @@ section {
 .avoid-nav{
     padding-top: var(--header-height);
 }
-.max-width-1200 {
-    width: min(1200px, 100%);
-    padding: 0 40px;
-    margin: auto;
-}
+
 .batch-num{
     list-style: none; 
     width: 100%;
@@ -142,9 +139,14 @@ section {
 .num:nth-child(2) {
     font-size: var(--body1);
     position: absolute;
-    left: 50%;
+    left: 45%;
     top: 60%;
     transform: translate(1000%, -50%)
+}
+.boxes {
+    display: flex;
+    flex-direction: column; /* 세로로 배치 */
+    gap: var(--gutter);
 }
 .box {
     width: 100%;
@@ -160,4 +162,80 @@ section {
 }
 .box:hover {
     transform: translateY(-2px);
+}
+.box-more {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: var(--gutter);
+    top: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.box-more > div {
+    width: 100%;
+    height: 2px;
+    background-color: var(--bg-5);
+    transition: 0.3s;
+}
+.box-more > div:nth-child(1) {
+    margin-right: auto;
+}
+.box-more > div:nth-child(3) {
+    margin-left: auto;
+}
+.box-pic {
+    width: 150px;
+    height: 110px;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box-pic img {
+    width: 100%;
+    object-fit: contain;
+    transition: 0.3s;
+    padding: 1rem 2rem;
+}
+.box-pic img:hover {
+    transform: scale(1.1);
+}
+.box-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 0;
+    text-align: left;
+}
+.box-content-name{
+    font-size: var(--heading3);
+    font-weight: 900;
+}
+.box-content--introduction {
+    font-size: var(--body1);
+    color: var(--subtext-gray);
+    line-height: 2rem;
+    word-break: keep-all;
+}
+.box-content--team{
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+.box-content--team li.leader{
+    list-style: none;
+    background-color: var(--blue);
+    color: white;
+}
+.box-content--team li{
+    list-style: none;
+    background-color: var(--bg-5);
+    padding: 6px 8px;
+    font-size: var(--body2);
+    border-radius: 5px;
+    color: black;
 }
