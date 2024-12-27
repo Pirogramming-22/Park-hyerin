@@ -43,23 +43,22 @@ body {
     font-size: 11px;
     line-height: 1;
     font-family: "Nexon", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-    overflow-x: hidden;
     position: relative;
 }
 .flex_cc {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
 }
 .container {
     background-color: var(--black);
     color: var(--white);
-    flex-direction: column;
+
 }
 #main-header{  
     position: fixed;   
-    height: 11rem;
+    height: 9rem;
     width: 100%;
     padding: 0 var(--offset);
     top: 0;
@@ -82,6 +81,7 @@ body {
     .head--container {
         padding: 0 !important;
     }
+    
 }
 .logo {
     background-image: url(./logo.svg);
@@ -105,19 +105,19 @@ body {
 .header-nav:nth-child(3) {
     color: var(--green-1) 
 }
-section {
+#portfolio {
     display: block;
     unicode-bidi: isolate;
     position: relative;
+    background-color:var(--black);
 }
-.section-container{
-    padding: 90px var(--offset) 50px;
-    padding-bottom: 50px;
-}
+
 .avoid-nav{
     padding-top: var(--header-height);
 }
-
+.section-container{
+    padding: auto;
+}
 .batch-num{
     list-style: none; 
     width: 100%;
@@ -132,7 +132,7 @@ section {
 .num:nth-child(1) {
     font-size: var(--heading3);
     position: absolute;
-    left: 50%;
+    left: 90%;
     top: 60%;
     transform: translate(-50%, -50%)
 }
@@ -145,8 +145,10 @@ section {
 }
 .boxes {
     display: flex;
-    flex-direction: column; /* 세로로 배치 */
+    flex-direction: column; 
     gap: var(--gutter);
+    height: 100%;
+    align-items: center;
 }
 .box {
     width: 100%;
@@ -154,10 +156,8 @@ section {
     border-radius: 10px;
     padding: var(--gutter);
     display: flex;
-    gap: var(--gutter);
     margin-bottom: var(--gutter);
     cursor: pointer;
-    position: relative;
     height: 142px;
 }
 .box:hover {
@@ -179,11 +179,13 @@ section {
     background-color: var(--bg-5);
     transition: 0.3s;
 }
-.box-more > div:nth-child(1) {
-    margin-right: auto;
+.box:hover .box-more > div:nth-child(1) {
+    width: 50%;
+    transform: translateX(0px);
 }
-.box-more > div:nth-child(3) {
-    margin-left: auto;
+.box:hover .box-more > div:nth-child(3) {
+    width: 50%;
+    transform: translateX(10px);
 }
 .box-pic {
     width: 150px;
@@ -208,7 +210,7 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 5px 0;
+    padding: 5px 10px;
     text-align: left;
 }
 .box-content-name{
@@ -231,6 +233,7 @@ section {
     background-color: var(--blue);
     color: white;
 }
+
 .box-content--team li{
     list-style: none;
     background-color: var(--bg-5);
