@@ -48,8 +48,6 @@ function check_numbers() {
  resultRow.style.display ='flex';
  resultRow.style.justifyContent ='space-between';
 
-
-
  const inputSpan = document.createElement('span');
  inputSpan.textContent = `${userInputs.join(' ')}`;
  inputSpan.className = 'left';
