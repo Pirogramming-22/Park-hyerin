@@ -15,24 +15,26 @@
 
 ▫️ Javascript 스톱워치 과제
 -  전체 선택 버튼 기능
-// stop_record의 아이콘을 통해 전체 기록을 선택 및 선택 해제하는 함수
-const toggleAllRecordSelection = () => {
-    // 전체 선택 아이콘이 현재 '체크됨' 상태인지 확인
-    
-    if (allChecked) {     
-        // stop_record 아이콘이 체크됨 상태였다면 체크되지 않음으로 바꾸고 각 기록들의 아이콘을 체크되지 않음으로 만듦
-        ...
-    } else {
-        // stop_record 아이콘이 체크되지 않은 상태였다면 체크됨으로 바꾸고 각 기록들의 아이콘을 체크됨으로 만듦
-    }
-    syncSelectAllIconState(); // 선택된 기록 상태에 맞게 전체 선택 아이콘의 상태를 동기화(뒤에 이어질 함수에서 사용용)
-};
-// 선택된 기록의 수가 전체 기록의 수와 같으면 stop_record의 아이콘을 '체크됨' 상태로 만들어주는 함수
-const syncSelectAllIconState = () => {
-    // 기록의 전체 개수(totalRecords)와 선택된 개수(selectedCount) 확인
-    if (selectedCount === totalRecords) { //stop_record의 아이콘을 '체크됨'으로 변경
-        checkboxIcon.classList.replace('ri-checkbox-blank-circle-line', 'ri-checkbox-circle-line');
-    } else {                             // stop_record의 아이콘을 '체크되지 않음음'으로 변경
-        checkboxIcon.classList.replace('ri-checkbox-circle-line', 'ri-checkbox-blank-circle-line');
-    }
-};
+
+    // stop_record의 아이콘을 통해 전체 기록을 선택 및 선택 해제하는 함수
+    const toggleAllRecordSelection = () => {
+        // 전체 선택 아이콘이 현재 '체크됨' 상태인지 확인
+        
+        if (allChecked) {     
+            // stop_record 아이콘이 체크됨 상태였다면 체크되지 않음으로 바꾸고 각 기록들의 아이콘을 체크되지 않음으로 만듦
+            ...
+        } else {
+            // stop_record 아이콘이 체크되지 않은 상태였다면 체크됨으로 바꾸고 각 기록들의 아이콘을 체크됨으로 만듦
+        }
+        syncSelectAllIconState(); // 선택된 기록 상태에 맞게 전체 선택 아이콘의 상태를 동기화(뒤에 이어질 함수에서 사용용)
+    };
+
+    // 선택된 기록의 수가 전체 기록의 수와 같으면 stop_record의 아이콘을 '체크됨' 상태로 만들어주는 함수
+    const syncSelectAllIconState = () => {
+        // 기록의 전체 개수(totalRecords)와 선택된 개수(selectedCount) 확인
+        if (selectedCount === totalRecords) { //stop_record의 아이콘을 '체크됨'으로 변경
+            checkboxIcon.classList.replace('ri-checkbox-blank-circle-line', 'ri-checkbox-circle-line');
+        } else {                             // stop_record의 아이콘을 '체크되지 않음음'으로 변경
+            checkboxIcon.classList.replace('ri-checkbox-circle-line', 'ri-checkbox-blank-circle-line');
+        }
+    };
