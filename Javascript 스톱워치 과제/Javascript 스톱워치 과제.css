@@ -26,7 +26,7 @@ h1{
     font-size: 40px;
 }
 .stop_watch {
-    width: 50%;              
+    width: 500px;              
     height: 30dvh;          
     background-color:#333333; 
     border-radius: 30px;       
@@ -74,47 +74,49 @@ h1{
     background-color: #333333;
     color: black;
     border-radius: 25px 25px 0 0;
-    width: 50%;              
+    width: 500px;              
     height: 55px;
     margin-top: 30px;
 }
 h2{
     font-weight: 100;
 }
-.stop_record .ri-checkbox-blank-circle-line,
-.stop_record .ri-checkbox-circle-line{
+.ri-checkbox-blank-circle-line,
+.ri-checkbox-circle-line{
     font-size: 32px;
     border-radius: 50%;
     padding: 15px;
 }
-.record .ri-checkbox-blank-circle-line,
-.record .ri-checkbox-circle-line{
-    font-size: 32px;
-    border-radius: 50%;
-    padding: 15px;
-    margin-right: 125px;
-}
+
 .ri-delete-bin-7-line{
     font-size: 32px;
     padding: 15px;
+}
+.ri-delete-bin-7-line:hover{
+    color: red;
 }
 .records {
     margin: 0;
     padding: 0;
     list-style: none;
-    width: 50%;
+    width: 500px;
+    background-color: black;            
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: center;
 }
 .record {
     display: flex;             
-    align-items: center;   
-    justify-content: flex-start;          
+    align-items: center;         
     height: 55px;
     font-size: 25px;
+    text-align: center;
 }
-.record button {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border-color: black;
-    background-color: #333;
+.record span{
+    margin-left: 150px;
+    margin-right: 197px;
+}
+.record .ri-checkbox-blank-circle-line,
+.record .ri-checkbox-circle-line{
+    display: flex;
 }

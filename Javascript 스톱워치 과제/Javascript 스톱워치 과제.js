@@ -1,7 +1,7 @@
-let time = 0; // Time in milliseconds
-let running = false; // State of the stopwatch (running or stopped)
-let interval; // Reference for the interval function
-let selectedRecords = []; // To track selected records for deletion
+let time = 0; 
+let running = false; 
+let interval; 
+let selectedRecords = []; 
 
 const timeDisplay = document.querySelector('.time');
 const startButton = document.querySelector('.start');
@@ -38,6 +38,7 @@ const stopStopwatch = () => {
         running = false;
         startButton.textContent = 'start';
     }
+    
     // Add record
     const record = document.createElement('li');
     record.classList.add('record');
@@ -52,6 +53,16 @@ const stopStopwatch = () => {
     recordsList.appendChild(record);
 };
 
+const resetStopwatch = () => {
+    time = 0;
+    timeDisplay.textContent = '00:00';
+    if (running) {
+        clearInterval(interval);
+        running = false;
+        startButton.textContent = 'start';
+    }
+};
+
 const toggleRecordSelection = (checkbox, record) => {
     const index = selectedRecords.indexOf(record);
     if (index === -1) {
@@ -63,25 +74,10 @@ const toggleRecordSelection = (checkbox, record) => {
     }
 };
 
-const deleteSelectedRecords = () => {
-    selectedRecords.forEach((record) => {
-        recordsList.removeChild(record);
-    });
-    selectedRecords = [];
-};
-
-const resetStopwatch = () => {
-    time = 0;
-    timeDisplay.textContent = '00:00';
-    if (running) {
-        clearInterval(interval);
-        running = false;
-        startButton.textContent = 'start';
-    }
-};
 
 const toggleAllRecordSelection = () => {
     const allChecked = checkboxIcon.classList.contains('ri-checkbox-circle-line');
+    
     if (allChecked) {
         selectedRecords = [];
         checkboxIcon.classList.replace('ri-checkbox-circle-line', 'ri-checkbox-blank-circle-line');
@@ -97,6 +93,15 @@ const toggleAllRecordSelection = () => {
             recordCheckbox.classList.replace('ri-checkbox-blank-circle-line', 'ri-checkbox-circle-line');
         });
     }
+};
+
+const deleteSelectedRecords = () => {
+    selectedRecords.forEach((record) => {
+        recordsList.removeChild(record);
+    });
+    selectedRecords = [];
+    
+    checkboxIcon.classList.replace('ri-checkbox-circle-line', 'ri-checkbox-blank-circle-line');
 };
 
 startButton.addEventListener('click', startStopwatch);
