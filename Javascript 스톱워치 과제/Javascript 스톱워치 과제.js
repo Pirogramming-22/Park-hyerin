@@ -25,7 +25,7 @@ const formatTime = (ms) => {
 const startStopwatch = () => {
     if (!running) {
         interval = setInterval(() => {
-            time += 10; // Increment time by 10ms
+            time += 10; 
             timeDisplay.textContent = formatTime(time);
         }, 10);
         running = true;
@@ -39,7 +39,6 @@ const stopStopwatch = () => {
         startButton.textContent = 'start';
     }
     
-    // Add record
     const record = document.createElement('li');
     record.classList.add('record');
     const recordText = document.createElement('span');
@@ -72,8 +71,9 @@ const toggleRecordSelection = (checkbox, record) => {
         selectedRecords.splice(index, 1);
         checkbox.classList.replace('ri-checkbox-circle-line', 'ri-checkbox-blank-circle-line');
     }
-};
 
+    syncSelectAllIconState();
+};
 
 const toggleAllRecordSelection = () => {
     const allChecked = checkboxIcon.classList.contains('ri-checkbox-circle-line');
@@ -92,6 +92,19 @@ const toggleAllRecordSelection = () => {
             const recordCheckbox = record.querySelector('i');
             recordCheckbox.classList.replace('ri-checkbox-blank-circle-line', 'ri-checkbox-circle-line');
         });
+    }
+
+    syncSelectAllIconState();
+};
+
+const syncSelectAllIconState = () => {
+    const totalRecords = recordsList.querySelectorAll('.record').length; 
+    const selectedCount = selectedRecords.length; 
+
+    if (selectedCount === totalRecords) {
+        checkboxIcon.classList.replace('ri-checkbox-blank-circle-line', 'ri-checkbox-circle-line');
+    } else {
+        checkboxIcon.classList.replace('ri-checkbox-circle-line', 'ri-checkbox-blank-circle-line');
     }
 };
 

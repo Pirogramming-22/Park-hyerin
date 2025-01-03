@@ -86,14 +86,17 @@ h2{
     font-size: 32px;
     border-radius: 50%;
     padding: 15px;
+    cursor: pointer
 }
 
 .ri-delete-bin-7-line{
     font-size: 32px;
     padding: 15px;
+    cursor: pointer
 }
 .ri-delete-bin-7-line:hover{
     color: red;
+    cursor: pointer
 }
 .records {
     margin: 0;
@@ -119,4 +122,5 @@ h2{
 .record .ri-checkbox-blank-circle-line,
 .record .ri-checkbox-circle-line{
     display: flex;
+    cursor: pointer
 }
