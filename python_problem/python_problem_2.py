@@ -1,10 +1,10 @@
 students = []
 
-##############  menu 1 사전에 학생 정보 저장하는 코딩딩
+##############  menu 1 사전에 학생 정보 저장하는 코딩
 def Menu1(name, score1, score2):
     students.append({"name": name, "score1": score1, "score2": score2, "grade": None})
 
-##############  menu 2 학점 부여하는 코딩딩
+##############  menu 2 학점 부여하는 코딩
 def Menu2():
     for student in students:
         Score1 = int(student["score1"])
@@ -33,7 +33,7 @@ def Menu4(name):
     global students
     students = [student for student in students if student["name"] != name]
 
-# 메인 프로그램
+# 메인
 print("*Menu*******************************")
 print("1. Inserting students Info(name score1 score2)")
 print("2. Grading")
@@ -53,7 +53,7 @@ while True:
 
             name, score1, score2 = data[0], data[1], data[2]
             if any(student["name"] == name for student in students):
-                raise ValueError("Student already exists.")
+                raise ValueError("Already exist name!")
 
             if not score1.isdigit() or not score2.isdigit():
                 raise ValueError("Scores is not positive integer!")
@@ -93,7 +93,7 @@ while True:
                     print(f"{name} student information is deleted.")
 
         elif choice == "5":
-            print("Exit program!")
+            print("Exit Program!")
             break
 
         else:
