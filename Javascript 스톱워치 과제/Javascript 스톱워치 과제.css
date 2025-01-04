@@ -1,0 +1,126 @@
+*{
+    box-sizing: border-box;
+}
+body {
+    margin: 50px;
+    padding: 0;
+    background-color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #0bec12;
+}
+.header-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+.ri-timer-fill{
+    font-size: 35px;
+    padding: 0 5px;
+}
+h1{
+    font-size: 40px;
+}
+.stop_watch {
+    width: 500px;              
+    height: 30dvh;          
+    background-color:#333333; 
+    border-radius: 30px;       
+    margin: 20px auto;         
+    display: flex;             
+    justify-content: center;   
+    align-items: center; 
+    flex-direction: column;
+    font-weight: 100;
+}
+.time{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    height: 100px;
+    font-size: 45px;
+    background-color: black;
+    border-radius: 35px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+}
+.timer_btn{
+    padding: 30px 0 0;
+    display: flex;
+    gap: 25px;
+    font-size: 20px;
+    text-align: center;
+}
+.start, .stop, .reset{
+    line-height: 85px;
+    width: 85px;
+    height: 85px;
+    font-size: 20px;
+    border-radius: 40px;
+    background-color: black;
+    color: #0bec12;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+.stop_record{
+    display: flex;             
+    align-items: center;
+    justify-content: space-between;    
+    background-color: #333333;
+    color: black;
+    border-radius: 25px 25px 0 0;
+    width: 500px;              
+    height: 55px;
+    margin-top: 30px;
+}
+h2{
+    font-weight: 100;
+}
+.ri-checkbox-blank-circle-line,
+.ri-checkbox-circle-line{
+    font-size: 32px;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer
+}
+
+.ri-delete-bin-7-line{
+    font-size: 32px;
+    padding: 15px;
+    cursor: pointer
+}
+.ri-delete-bin-7-line:hover{
+    color: red;
+    cursor: pointer
+}
+.records {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 500px;
+    background-color: black;            
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: center;
+}
+.record {
+    display: flex;             
+    align-items: center;         
+    height: 55px;
+    font-size: 25px;
+    text-align: center;
+}
+.record span{
+    margin-left: 150px;
+    margin-right: 197px;
+}
+.record .ri-checkbox-blank-circle-line,
+.record .ri-checkbox-circle-line{
+    display: flex;
+    cursor: pointer
+}
