@@ -1,0 +1,14 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+    <h2>{% if form.instance.pk %}리뷰 수정{% else %}새 리뷰 작성{% endif %}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">저장</button>
+        <a href="{% url 'post_list' %}" class="btn">리뷰 리스트로 돌아가기</a>
+    </form>
+
+    
+{% endblock %}

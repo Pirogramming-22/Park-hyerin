@@ -1,0 +1,25 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+    <h2>리뷰 리스트</h2>
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>개봉년도</th>
+                <th>장르</th>
+                <th>별점</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review in reviews %}
+                <tr>
+                    <td><a href="{% url 'post_detail' pk=review.pk %}">{{ review.title }}</a></td>
+                    <td>{{ review.release_year }}</td>
+                    <td>{{ review.genre }}</td>
+                    <td>{{ review.rating }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

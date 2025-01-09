@@ -1,0 +1,16 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+    <h2>{{ review.title }}</h2>
+    <p><strong>감독:</strong> {{ review.director }}</p>
+    <p><strong>주연:</strong> {{ review.actors }}</p>
+    <p><strong>장르:</strong> {{ review.genre }}</p>
+    <p><strong>별점:</strong> {{ review.rating }}</p>
+    <p><strong>러닝타임:</strong> {{ review.runtime }} 분</p>
+    <p>---------------------------------------------------------------------------------------------------------------------------------</p>
+    <p><strong>리뷰 내용:</strong></p>
+    <p>{{ review.review_content }}</p>
+
+    <a href="{% url 'post_edit' pk=review.pk %}" class="btn">수정</a>
+    <a href="{% url 'post_delete' pk=review.pk %}" class="btn">삭제</a>
+{% endblock %}
