@@ -1,14 +1,63 @@
 {% extends 'reviews/base.html' %}
 
 {% block content %}
+    <style>
+        .form-group{
+            font-size: 18px;
+        }
+        .btn-primary {
+            margin-right: 10px;
+            text-decoration: none; 
+            color: #000; 
+            padding: 5px 10px; 
+            border-radius: 5px; 
+            background-color: #f4f4f4;
+            border: none;        
+            outline: none;
+            font-size: 18px;
+        }
+        .btn-primary:hover {
+            background-color: #dbdada; 
+        }
+    </style>
     <h2>{% if form.instance.pk %}리뷰 수정{% else %}새 리뷰 작성{% endif %}</h2>
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn">저장</button>
-        <a href="{% url 'post_list' %}" class="btn">리뷰 리스트로 돌아가기</a>
-    </form>
+        
+        <div class="form-group">
+            {{ form.title.label_tag }}<br>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            {{ form.director.label_tag }}<br>
+            {{ form.director }}
+        </div>
+        <div class="form-group">
+            {{ form.actors.label_tag }}<br>
+            {{ form.actors }}
+        </div>
+        <div class="form-group">
+            {{ form.genre.label_tag }}<br>
+            {{ form.genre }}
+        </div>
+        <div class="form-group">
+            {{ form.rating.label_tag }}<br>
+            {{ form.rating }}
+        </div>
+        <div class="form-group">
+            {{ form.runtime.label_tag }}<br>
+            {{ form.runtime }}
+        </div>
+        <div class="form-group">
+            {{ form.review_content.label_tag }}<br>
+            {{ form.review_content }}
+        </div>
+        <div class="form-group">
+            {{ form.release_year.label_tag }}<br>
+            {{ form.release_year }}
+        </div>
 
-    
+        <button type="submit" class="btn-primary">저장</button>
+    </form>
 {% endblock %}
