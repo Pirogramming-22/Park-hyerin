@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #f4f4f4;
         }
         header {
             background-color: #333;
@@ -23,7 +23,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 2px solid #f4f4f9;
+            border: 1px solid #f4f4f9;
             border-bottom-color: black;
             padding: 10px;
         }
@@ -47,7 +47,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background-color: #ebebeb;
+            background-color: white;
             box-shadow: #6c6c6c 5px 5px 30px -5px;
             border-radius: 20px;
             padding: 35px;
@@ -74,19 +74,19 @@
         .form-group{
             margin-bottom: 10px;
         }
-        .piroColor{
-            color: #0bec12;
+        .pointColor{
+            color: #2A29F4;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>나만의 <strong class="piroColor">영화 기록</strong> 사이트</h1>
+        <h1>나만의 <strong>영화 기록</strong> 사이트</h1>
     </header>
 
     <nav>
-        <a href="{% url 'post_list' %}" class="nav-left">my<strong class="piroColor">Movie</strong>reviews</a>
-        <a href="{% url 'post_new' %}" class="nav-right"><strong class="piroColor">리뷰</strong>작성</a>
+        <a href="{% url 'post_list' %}" class="nav-left">my<strong class="pointColor">Movie</strong>reviews</a>
+        <a href="{% url 'post_new' %}" class="nav-right"><strong class="pointColor">리뷰</strong>작성</a>
     </nav>
 
     <div class="container">
@@ -96,7 +96,7 @@
     </div>
 
     <footer>
-        <p>&copy; 나만의 <strong class="piroColor">영화 기록</strong> 사이트</p>
+        <p>&copy; 나만의 <strong>영화 기록</strong> 사이트</p>
     </footer>
 </body>
 </html>

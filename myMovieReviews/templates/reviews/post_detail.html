@@ -16,15 +16,21 @@
         btns a:hover {
             background-color: #dbdada; 
         }
+        line{
+            width: 100%;
+            height: 1px;
+            background-color: black;
+            border-radius: 50px;
+        }
 
     </style>
     <h2>{{ review.title }}</h2>
     <p><strong>감독:</strong> {{ review.director }}</p>
     <p><strong>주연:</strong> {{ review.actors }}</p>
-    <p><strong>장르:</strong> {{ review.genre }}</p>
+    <p><strong>장르:</strong> {{ review.get_genre_display }}</p>
     <p><strong>별점:</strong> {{ review.rating }}</p>
-    <p><strong>러닝타임:</strong> {{ review.runtime_display }} 분</p>
-    <p>---------------------------------------------------------------------------------------------------------------------------------</p>
+    <p><strong>러닝타임:</strong> {{ review.runtime_display }}</p>
+    <line></line>
     <p><strong>리뷰 내용:</strong></p>
     <p>{{ review.review_content }}</p>
 

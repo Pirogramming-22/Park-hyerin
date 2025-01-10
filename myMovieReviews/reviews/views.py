@@ -19,8 +19,8 @@ def post_list(request):
 # 리뷰 디테일 페이지
 def post_detail(request, pk):
     review = get_object_or_404(MovieReview, pk=pk)
-    hours = review.runtime // 60  # 시간 계산
-    minutes = review.runtime % 60  # 분 계산
+    hours = review.runtime // 60  
+    minutes = review.runtime % 60 
     review.runtime_display = f"{hours}시간 {minutes}분"
     return render(request, 'reviews/post_detail.html', {'review': review})
 
@@ -30,7 +30,7 @@ def post_new(request):
         form = MovieReviewForm(request.POST)
         if form.is_valid():
             review = form.save()
-            return redirect('post_detail', pk=review.pk)
+            return redirect('post_list')
     else:
         form = MovieReviewForm()
     return render(request, 'reviews/post_form.html', {'form': form})
@@ -52,3 +52,4 @@ def post_delete(request, pk):
     review = get_object_or_404(MovieReview, pk=pk)
     review.delete()
     return redirect('post_list')
+

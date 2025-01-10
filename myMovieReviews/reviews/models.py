@@ -18,7 +18,7 @@ class MovieReview(models.Model):
     title = models.CharField(max_length=100)
     director = models.CharField(max_length=100)
     actors = models.CharField(max_length=255)
-    genre = models.CharField(max_length=50, choices=GENRE_CHOICES, verbose_name="장르르" )
+    genre = models.CharField(max_length=50, choices=GENRE_CHOICES, verbose_name="장르" )
     rating = models.DecimalField(max_digits=2, decimal_places=1)
     runtime = models.PositiveIntegerField()  # minutes
     review_content = models.TextField()
