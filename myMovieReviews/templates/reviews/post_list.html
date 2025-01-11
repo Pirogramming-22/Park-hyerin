@@ -1,0 +1,77 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+    <style>
+        sort {
+            display: flex;
+            margin-bottom: 10px;
+            justify-content: flex-start; 
+        }
+        sort .btn {
+            margin-right: 10px;
+            text-decoration: none; 
+            color: #000; 
+            padding: 5px 10px; 
+            border-radius: 5px; 
+            background-color: #f4f4f4;
+        }
+        sort .btn:hover {
+            background-color: #dbdada; 
+        }
+        table {
+            font-size: 18px;
+            margin: 15px auto; 
+            text-align: center;
+            border-collapse: collapse; 
+        }
+        table th, table td {
+            padding: 10px; 
+        }
+        table th {
+            background-color: #f4f4f4c4;
+        }
+        table, th, td {
+            border: 1px solid #ccc; 
+        }
+        .title{
+            text-decoration: none;
+            color: black;
+            transition: color 0.3s ease, transform 0.2s ease-in-out, text-shadow 0.3s ease; 
+        }
+        .title:visited {
+            color: black;
+        }
+        .title:hover{
+            text-shadow: 0 0 25px rgba(42, 41, 244, 1), 0 0 35px rgba(42, 41, 244, 0.9);
+            font-weight: bold;
+        }
+    </style>
+    <h2>리뷰 리스트</h2>
+    <sort>
+        <a href="?sort=title" class="btn">제목순</a>
+        <a href="?sort=rating" class="btn">별점 높은 순</a>
+        <a href="?sort=runtime" class="btn">상영시간 긴 순</a>
+    </sort>
+    <table border="1px solid" width="100%">
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>개봉년도</th>
+                <th>장르</th>
+                <th>별점</th>
+                <th>러닝타임</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review in reviews %}
+                <tr>
+                    <td><a href="{% url 'post_detail' pk=review.pk %}" class="title">{{ review.title }}</a></td>
+                    <td>{{ review.release_year }}</td>
+                    <td>{{ review.get_genre_display }}</td>
+                    <td>{{ review.rating }}</td>
+                    <td>{{ review.runtime_display }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나만의 영화 기록 사이트</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        html, body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #f4f4f9;
+            border-bottom-color: black;
+            padding: 10px;
+        }
+        nav a {
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            font-size: 25px;
+        }
+        nav a:hover {
+            background-color: #eeeeee;
+            border-radius: 15px;
+        }
+        .nav-left, .nav-right{
+            margin: 0 20px;
+        }
+        .container{
+            width: 80%;
+            margin: 55px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: white;
+            box-shadow: #6c6c6c 5px 5px 30px -5px;
+            border-radius: 20px;
+            padding: 35px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            bottom: 0;
+            position: fixed;
+        }
+        h1{
+            font-weight: 300;
+        }
+        h2{
+            color: black;
+            font-size: 25px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .form-group{
+            margin-bottom: 10px;
+        }
+        .pointColor{
+            color: #2A29F4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>나만의 <strong>영화 기록</strong> 사이트</h1>
+    </header>
+
+    <nav>
+        <a href="{% url 'post_list' %}" class="nav-left">my<strong class="pointColor">Movie</strong>reviews</a>
+        <a href="{% url 'post_new' %}" class="nav-right"><strong class="pointColor">리뷰</strong>작성</a>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        <!-- 페이지별  -->
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 나만의 <strong>영화 기록</strong> 사이트</p>
+    </footer>
+</body>
+</html>
