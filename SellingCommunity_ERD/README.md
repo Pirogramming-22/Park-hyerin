@@ -4,7 +4,7 @@
 
 
 
-## 완성한 ERD 페이지의 링크크
+## 완성한 ERD 페이지의 링크
 https://www.erdcloud.com/d/29Rn9ngW2AxWPz4qj
 
 <br>
