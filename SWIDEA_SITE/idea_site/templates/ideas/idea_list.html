@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>아이디어 관리</h1>
+<div class="idea-list">
+    {% for idea in ideas %}
+    <div class="idea-item">
+        <img src="{{ idea.image.url }}" alt="{{ idea.title }}" class="idea-thumbnail">
+        <h2>{{ idea.title }}</h2>
+        <p>{{ idea.content }}</p>
+        <p>관심도: {{ idea.interest }}</p>
+        <a href="{% url 'idea_detail' idea.pk %}">상세 보기</a>
+    </div>
+    {% empty %}
+    <p>등록된 아이디어가 없습니다.</p>
+    {% endfor %}
+</div>
+{% endblock %}
