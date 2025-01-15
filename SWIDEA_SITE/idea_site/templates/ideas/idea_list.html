@@ -51,7 +51,6 @@
                 headers: { "X-CSRFToken": "{{ csrf_token }}" }, 
 
                 success: function(response) {
-                    console.log(response);
                     const $icon = $button.find('i');
                     if (response.is_starred) {
                         $icon.removeClass('ri-star-line').addClass('ri-star-fill');
@@ -79,8 +78,6 @@
                 headers: { "X-CSRFToken": "{{ csrf_token }}" }, 
 
                 success: function(response) {
-                    console.log(response);
-                    console.log($interestCount);
                     // 관심도 업데이트 후 DOM 수정
                     $interestCount.text(response.interest);
                 },
@@ -100,6 +97,7 @@
                 url: url.toString(),
                 method: "GET",
                 success: function(response) {
+                    console.log(response);
                     $('.idea-container').html($(response).find('.idea-container').html());  
                 },
                 error: function() {

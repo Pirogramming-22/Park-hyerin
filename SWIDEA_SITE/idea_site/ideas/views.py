@@ -12,8 +12,8 @@ def idea_list(request):
     if sort_by == 'name':
         ideas = Idea.objects.all().order_by('title')
     elif sort_by == 'likes':
-        starred_ideas = IdeaStar.objects.select_related('idea').filter(idea__isnull=False).order_by('starred_at')
-        ideas = [starred.idea for starred in starred_ideas]
+        starred_ideas = IdeaStar.objects.select_related('idea').filter(idea__isnull=False)
+        ideas = starred_ideas.order_by('starred_at')
     elif sort_by == 'created_at':
         ideas = Idea.objects.all().order_by('created_at')
     else:
@@ -50,7 +50,14 @@ def idea_create(request):
 # 아이디어 상세 페이지
 def idea_detail(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
-    return render(request, 'ideas/idea_detail.html', {'idea': idea})
+    is_starred = False
+    if request.user.is_authenticated:
+        is_starred = IdeaStar.objects.filter(user=request.user, idea=idea).exists()
+    else:
+        star_key = f"starred_idea_{idea.id}"
+        is_starred = star_key in request.session
+
+    return render(request, 'ideas/idea_detail.html', {'idea': idea, 'is_starred': is_starred})
 
 # 아이디어 수정
 def idea_update(request, pk):

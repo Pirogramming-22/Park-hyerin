@@ -3,6 +3,13 @@
 {% block content %}
 <h1>{{ idea.title }}</h1>
 <img src="{{ idea.image.url }}" alt="{{ idea.title }}" class="thumbnail">
+<button class="star-btn">
+    {% if is_starred %}
+        <i class="ri-star-fill"></i>
+    {% else %}
+        <i class="ri-star-line"></i>
+    {% endif %}
+</button>
 <p>{{ idea.content }}</p>
 <p>Interest: {{ idea.interest }}</p>
 <p>DevTool: <a href="{{ idea.devtool.get_absolute_url }}">{{ idea.devtool.name }}</a></p>
