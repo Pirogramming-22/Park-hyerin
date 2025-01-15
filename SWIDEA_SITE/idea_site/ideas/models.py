@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Idea(models.Model):
     title = models.CharField(max_length=200)
@@ -15,8 +17,9 @@ class Idea(models.Model):
         return reverse('ideas:detail', args=[self.id])
 
 class IdeaStar(models.Model):
-    idea = models.OneToOneField(Idea, on_delete=models.CASCADE)
-    is_starred = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    idea = models.ForeignKey(Idea, on_delete=models.CASCADE)
+    starred_at = models.DateTimeField(default=timezone.now)
 
-    def __str__(self):
-        return f"{self.idea.title} - Starred: {self.is_starred}"
+    class Meta:
+        unique_together = ('user', 'idea')

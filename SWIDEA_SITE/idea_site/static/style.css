@@ -65,6 +65,19 @@ main {
     text-align: center;
 }
 
+.star-btn i {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.star-btn i.ri-star-fill {
+    color: yellow; /* 찜한 상태는 노란색 */
+}
+
+.star-btn i.ri-star-line {
+    color: gray; /* 찜하지 않은 상태는 회색 */
+}
+
 .btn:hover {
     background-color: #0056b3;
 }

@@ -10,6 +10,16 @@ def idea_list(request):
     paginator = Paginator(ideas, 4)
     page = request.GET.get('page')
     ideas = paginator.get_page(page)
+    
+    # 로그인 여부에 따른 찜 상태 확인
+    for idea in ideas:
+        if request.user.is_authenticated:
+            idea.is_starred = IdeaStar.objects.filter(user=request.user, idea=idea).exists()
+        else:
+            # 비로그인 사용자의 경우, 세션을 통해 찜 상태 확인
+            star_key = f"starred_idea_{idea.id}"
+            idea.is_starred = star_key in request.session
+
     return render(request, 'ideas/idea_list.html', {'ideas': ideas})
 
 # 아이디어 등록
@@ -56,3 +66,30 @@ def idea_interest(request, pk):
         idea.interest -= 1
     idea.save()
     return JsonResponse({'interest': idea.interest})
+
+# 찜하기
+def toggle_star(request, idea_id):
+    idea = get_object_or_404(Idea, id=idea_id)
+    user = request.user if request.user.is_authenticated else None
+
+    if user:
+        starred = IdeaStar.objects.filter(user=user, idea=idea).exists()
+
+        if starred:
+            IdeaStar.objects.filter(user=user, idea=idea).delete()
+            is_starred = False
+        else:
+            IdeaStar.objects.create(user=user, idea=idea)
+            is_starred = True
+    else:
+        # 비로그인 사용자의 경우, 세션을 이용해서 찜 상태 관리
+        star_key = f"starred_idea_{idea.id}"
+
+        if star_key in request.session:
+            del request.session[star_key]
+            is_starred = False
+        else:
+            request.session[star_key] = True
+            is_starred = True
+
+    return JsonResponse({'is_starred': is_starred})

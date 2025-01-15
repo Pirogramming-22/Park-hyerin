@@ -5,18 +5,23 @@
     {% for idea in ideas %}
     <div class="idea-item">
         <img src="{{ idea.image.url }}" alt="{{ idea.title }}" class="thumbnail">
+        <button class="star-btn" data-id="{{ idea.id }}">
+            {% if idea.is_starred %}
+            <!-- 찜한 상태일 때: 채워진 별 아이콘 -->
+            <i class="ri-star-fill"></i>
+            {% else %}
+            <!-- 찜하지 않은 상태일 때: 테두리만 있는 별 아이콘 -->
+            <i class="ri-star-line"></i>
+            {% endif %}
+        </button>
         <h2><a href="{{ idea.get_absolute_url }}">{{ idea.title }}</a></h2>
         <p>Interest: {{ idea.interest }}</p>
         <button class="interest-btn" data-id="{{ idea.id }}" data-action="increase">+</button>
         <button class="interest-btn" data-id="{{ idea.id }}" data-action="decrease">-</button>
-        <div>
-            <button class="star-btn" data-id="{{ idea.id }}">
-                {% if idea.ideastar.is_starred %}⭐{% else %}☆{% endif %}
-            </button>
-        </div>
     </div>
     {% endfor %}
 </div>
+
 <div class="pagination">
     {% if ideas.has_previous %}
     <a href="?page={{ ideas.previous_page_number }}">Previous</a>
@@ -26,4 +31,31 @@
     <a href="?page={{ ideas.next_page_number }}">Next</a>
     {% endif %}
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.star-btn').click(function() {
+            const ideaId = $(this).data('id'); 
+            const $button = $(this); 
+
+            $.ajax({
+                url: "{% url 'ideas:toggle_star' idea_id=0 %}".replace(0, ideaId), 
+                method: "POST", 
+                headers: { "X-CSRFToken": "{{ csrf_token }}" }, 
+
+                success: function(response) {
+                    const $icon = $button.find('i');  // <i> 태그를 찾아서
+                    if (response.is_starred) {
+                        $icon.removeClass('ri-star-line').addClass('ri-star-fill');
+                    } else {
+                        $icon.removeClass('ri-star-fill').addClass('ri-star-line');
+                    }
+                },
+                error: function() {
+                    alert("찜하기 처리 중 오류 발생"); 
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}
