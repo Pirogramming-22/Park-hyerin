@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>DevTools List</h1>
-<div class="devtool-container">
-    {% for devtool in devtools %}
-    <div class="devtool-item">
-        <h2><a href="{{ devtool.get_absolute_url }}">{{ devtool.name }}</a></h2>
-        <p>Kind: {{ devtool.kind }}</p>
-        <p>{{ devtool.content }}</p>
+<div class="devtool-header">
+    <h1>DevTools List</h1>
+    <h3>개발툴 목록 페이지 입니다. 자신이 사용 가능한 개발들의 목록을 확인해 보세요.</h3>
+</div>
+    <div class="devtool-container">
+        {% for devtool in devtools %}
+        <div class="devtool-item">
+            <h2><a href="{{ devtool.get_absolute_url }}" id="devtool-name">{{ devtool.name }}</a></h2>
+            <p>종류: {{ devtool.kind }}</p>
+            <p>{{ devtool.content }}</p>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-<div class="pagination">
-    {% if devtools.has_previous %}
-    <a href="?page={{ devtools.previous_page_number }}">Previous</a>
-    {% endif %}
-    <span>Page {{ devtools.number }} of {{ devtools.paginator.num_pages }}</span>
-    {% if devtools.has_next %}
-    <a href="?page={{ devtools.next_page_number }}">Next</a>
-    {% endif %}
-</div>
+    <div class="pagination">
+        {% if devtools.has_previous %}
+        <a href="?page={{ devtools.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>Page {{ devtools.number }} of {{ devtools.paginator.num_pages }}</span>
+        {% if devtools.has_next %}
+        <a href="?page={{ devtools.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+
 {% endblock %}

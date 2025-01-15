@@ -1,11 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{% if form.instance.pk %}Edit DevTool{% else %}New DevTool{% endif %}</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
-<a href="/devtools/">Back to List</a>
+<div class="formbox">
+    <h1>{% if form.instance.pk %}DevTool Detail Update{% else %}DevTool Register{% endif %}</h1>
+    <h3>{% if form.instance.pk %}개발툴 세부내용 수정 페이지 입니다. 개발툴에 대해 수정사항이 있으면 고쳐보아요.{% else %}개발툴 등록 페이지 입니다. 자신이 다룰 수 있는 개발툴을 등록해보세요!{% endif %}</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.name.label_tag }}<br>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            {{ form.kind.label_tag }}<br>
+            {{ form.kind }}
+        </div>
+        <div class="form-group">
+            {{ form.content.label_tag }}<br>
+            {{ form.content }}
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</div>
 {% endblock %}

@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ devtool.name }}</h1>
-<p><strong>Kind:</strong> {{ devtool.kind }}</p>
-<p><strong>Description:</strong> {{ devtool.content }}</p>
+<div class="devtooldetailbox">
+    <h1>DevTool Detail</h1>
+    <h3>개발툴 세부내용 페이지 입니다. 자신이 다룰 수 있는 개발툴에 대한 상세내용을 확인해보아요.</h3>
+    <h1>{{ devtool.name }}</h1>
+    <p><strong>Kind:</strong> {{ devtool.kind }}</p>
+    <p><strong>Description:</strong> {{ devtool.content }}</p>
 
-<h2>Ideas using this DevTool:</h2>
-<ul>
-    {% for idea in devtool.idea_set.all %}
-    <li><a href="{{ idea.get_absolute_url }}">{{ idea.title }}</a></li>
-    {% empty %}
-    <li>No ideas are using this DevTool yet.</li>
-    {% endfor %}
-</ul>
+    <h2>만들 수 있는 SW 목록</h2>
+    <ul>
+        {% for idea in devtool.idea_set.all %}
+        <li><a href="{{ idea.get_absolute_url }}" id="idea-title">{{ idea.title }}</a></li>
+        {% empty %}
+        <li>No ideas are using this DevTool yet.</li>
+        {% endfor %}
+    </ul>
 
-<a href="{% url 'devTools:update' pk=devtool.pk %}">Edit</a>
-<form action="{% url 'devTools:delete' pk=devtool.pk %}" method="post" style="display:inline;">
-    {% csrf_token %}
-    <button type="submit">Delete</button>
-</form>
-<a href="/devtools/">Back to List</a>
+    <a href="{% url 'devTools:update' pk=devtool.pk %}" class="btn">수정</a>
+    <form action="{% url 'devTools:delete' pk=devtool.pk %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn">삭제</button>
+    </form>
+    <a href="/devtools/" class="btn">목록</a>
+</div>
 {% endblock %}
 

@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ idea.title }}</h1>
-<img src="{{ idea.image.url }}" alt="{{ idea.title }}" class="thumbnail">
-<button class="star-btn">
-    {% if is_starred %}
-        <i class="ri-star-fill"></i>
-    {% else %}
-        <i class="ri-star-line"></i>
-    {% endif %}
-</button>
-<p>{{ idea.content }}</p>
-<p>Interest: {{ idea.interest }}</p>
-<p>DevTool: <a href="{{ idea.devtool.get_absolute_url }}">{{ idea.devtool.name }}</a></p>
-<a href="{% url 'ideas:update' pk=idea.pk %}">Edit</a>
-<form action="{% url 'ideas:delete' pk=idea.pk %}" method="post" style="display:inline;">
-    {% csrf_token %}
-    <button type="submit">Delete</button>
-</form>
-<a href="/">Back to List</a>
+<div class="ideadetailbox">
+    <h1>Idea Detail</h1>
+    <h3>아이디어 세부내용 페이지 입니다. 당신이 구현하려 한 아이디어들을 자세히 살펴보세요.</h3>
+    <h1>{{ idea.title }}</h1>
+    <img src="{{ idea.image.url }}" alt="{{ idea.title }}" class="thumbnail">
+    <button class="star-btn">
+        {% if is_starred %}
+            <i class="ri-star-fill"></i>
+        {% else %}
+            <i class="ri-star-line"></i>
+        {% endif %}
+    </button>
+    <p>{{ idea.content }}</p>
+    <p>Interest: {{ idea.interest }}</p>
+    <p>DevTool: <a href="{{ idea.devtool.get_absolute_url }}" id="devtool-name">{{ idea.devtool.name }}</a></p>
+    <a href="{% url 'ideas:update' pk=idea.pk %}" class="btn">수정</a>
+    <form action="{% url 'ideas:delete' pk=idea.pk %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn">삭제</button>
+    </form>
+    <a href="/" class="btn">목록</a>
+</div>
 {% endblock %}
 
 
