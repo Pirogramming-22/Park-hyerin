@@ -74,10 +74,12 @@ def idea_delete(request, pk):
 def idea_interest(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
     action = request.POST.get('action')
+
     if action == 'increase':
         idea.interest += 1
     elif action == 'decrease' and idea.interest > 0:
         idea.interest -= 1
+        
     idea.save()
     return JsonResponse({'interest': idea.interest})
 

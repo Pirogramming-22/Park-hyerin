@@ -21,9 +21,9 @@
             {% endif %}
         </button>
         <h2><a href="{{ idea.get_absolute_url }}">{{ idea.title }}</a></h2>
-        <p>Interest: {{ idea.interest }}</p>
-        <button class="interest-btn" data-id="{{ idea.id }}" data-action="increase">+</button>
+        <p>Interest: <span class="interest-count">{{ idea.interest }}</span></p>
         <button class="interest-btn" data-id="{{ idea.id }}" data-action="decrease">-</button>
+        <button class="interest-btn" data-id="{{ idea.id }}" data-action="increase">+</button>
     </div>
     {% endfor %}
 </div>
@@ -61,6 +61,31 @@
                 },
                 error: function() {
                     alert("찜하기 처리 중 오류 발생");
+                }
+            });
+        });
+
+        // 관심도 증가 및 감소 처리
+        $('.interest-btn').click(function() {
+            const ideaId = $(this).data('id');
+            const action = $(this).data('action');  // "increase" 또는 "decrease"
+            const $button = $(this);
+            const $interestCount = $button.closest('.idea-item').find('.interest-count');
+
+            $.ajax({
+                url: "{% url 'ideas:idea_interest' pk=0 %}".replace(0, ideaId), 
+                method: "POST",
+                data: { action: action },  // action 파라미터 전달
+                headers: { "X-CSRFToken": "{{ csrf_token }}" }, 
+
+                success: function(response) {
+                    console.log(response);
+                    console.log($interestCount);
+                    // 관심도 업데이트 후 DOM 수정
+                    $interestCount.text(response.interest);
+                },
+                error: function() {
+                    alert("관심도 처리 중 오류 발생");
                 }
             });
         });
