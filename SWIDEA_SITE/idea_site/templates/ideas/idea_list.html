@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="listbox">
+    <div class="list-header">
+        <h1><strong>Idea List<strong></h1>
+        <h3>나의 아이디어를 잊지 말고 기록해보세요</h3>
+        <form id="sort-form" method="GET">
+            <select name="sort_by" id="sort-by">
+                <option value="" selected disabled>-- 정렬 기준 --</option>
+                <option value="name" {% if request.GET.sort_by == 'name' %}selected{% endif %}>이름 순</option>
+                <option value="created_at" {% if request.GET.sort_by == 'created_at' %}selected{% endif %}>등록 순</option>
+                <option value="newest" {% if request.GET.sort_by == 'newest' %}selected{% endif %}>최신순</option>
+                <option value="likes" {% if request.GET.sort_by == 'likes' %}selected{% endif %}>찜하기 순</option>
+            </select>
+        </form>
+    </div>
+    <div class="idea-container">
+        {% for idea in ideas %}
+        <div class="idea-item">
+            <img src="{{ idea.image.url }}" alt="{{ idea.title }}" class="thumbnail">
+            <button class="star-btn" data-id="{{ idea.id }}">
+                {% if idea.is_starred %}
+                    <i class="ri-star-fill"></i>
+                {% else %}
+                    <i class="ri-star-line"></i>
+                {% endif %}
+            </button>
+            <h2><a href="{{ idea.get_absolute_url }}" id="idea-title">{{ idea.title }}</a></h2>
+            <p>아이디어 관심도: <span class="interest-count">{{ idea.interest }}</span></p>
+            <button class="interest-btn" data-id="{{ idea.id }}" data-action="decrease">-</button>
+            <button class="interest-btn" data-id="{{ idea.id }}" data-action="increase">+</button>
+            <p>예상 개발툴: {{ idea.devtool.name }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if ideas.has_previous %}
+        <a href="?page={{ ideas.previous_page_number }}" id='page'>Previous</a>
+        {% endif %}
+        <span>Page {{ ideas.number }} of {{ ideas.paginator.num_pages }}</span>
+        {% if ideas.has_next %}
+        <a href="?page={{ ideas.next_page_number }}" id='page'>Next</a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // 찜하기 버튼 클릭 처리
+        $('.star-btn').click(function() {
+            const ideaId = $(this).data('id');
+            const $button = $(this);
+
+            $.ajax({
+                url: "{% url 'ideas:toggle_star' idea_id=0 %}".replace(0, ideaId), 
+                method: "POST", 
+                headers: { "X-CSRFToken": "{{ csrf_token }}" }, 
+
+                success: function(response) {
+                    const $icon = $button.find('i');
+                    if (response.is_starred) {
+                        $icon.removeClass('ri-star-line').addClass('ri-star-fill');
+                    } else {
+                        $icon.removeClass('ri-star-fill').addClass('ri-star-line');
+                    }
+
+                    if (window.location.pathname !== `/idea/${ideaId}/`) {
+                        location.reload(); // 디테일 페이지가 아니면 페이지를 새로고침
+                    }
+
+                },
+                error: function() {
+                    alert("찜하기 처리 중 오류 발생");
+                }
+            });
+        });
+
+        // 관심도 증가 및 감소 처리
+        $('.interest-btn').click(function() {
+            const ideaId = $(this).data('id');
+            const action = $(this).data('action');  // "increase" 또는 "decrease"
+            const $button = $(this);
+            const $interestCount = $button.closest('.idea-item').find('.interest-count');
+
+            $.ajax({
+                url: "{% url 'ideas:idea_interest' pk=0 %}".replace(0, ideaId), 
+                method: "POST",
+                data: { action: action },  // action 파라미터 전달
+                headers: { "X-CSRFToken": "{{ csrf_token }}" }, 
+
+                success: function(response) {
+                    console.log(response);
+                    console.log($interestCount);
+                    // 관심도 업데이트 후 DOM 수정
+                    $interestCount.text(response.interest);
+                },
+                error: function() {
+                    alert("관심도 처리 중 오류 발생");
+                }
+            });
+        });
+
+        // 정렬 기준 변경 시 AJAX 처리
+        $('#sort-by').change(function() {
+            const sortBy = $(this).val();  
+            const url = new URL(window.location.href);  
+            url.searchParams.set('sort_by', sortBy);  
+
+            $.ajax({
+                url: url.toString(),
+                method: "GET",
+                success: function(response) {
+                    $('.idea-container').html($(response).find('.idea-container').html());  
+                },
+                error: function() {
+                    alert("정렬 처리 중 오류 발생");
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea Site</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a class="site_name">My <strong>SW Idea</strong> Manage</a></li>
+                <li><a href="/">아이디어 관리</a></li>
+                <li><a href="/create/">아이디어 등록</a></li>
+                <li><a href="/devtools/">개발툴 관리</a></li>
+                <li><a href="/devtools/create/">개발툴 등록</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
