@@ -79,7 +79,7 @@ def idea_interest(request, pk):
         idea.interest += 1
     elif action == 'decrease' and idea.interest > 0:
         idea.interest -= 1
-        
+
     idea.save()
     return JsonResponse({'interest': idea.interest})
 

@@ -6,10 +6,12 @@
 <p>{{ idea.content }}</p>
 <p>Interest: {{ idea.interest }}</p>
 <p>DevTool: <a href="{{ idea.devtool.get_absolute_url }}">{{ idea.devtool.name }}</a></p>
-<a href="{{ idea.get_absolute_url }}/update/">Edit</a>
-<form action="{{ idea.get_absolute_url }}/delete/" method="post" style="display:inline;">
+<a href="{% url 'ideas:update' pk=idea.pk %}">Edit</a>
+<form action="{% url 'ideas:delete' pk=idea.pk %}" method="post" style="display:inline;">
     {% csrf_token %}
     <button type="submit">Delete</button>
 </form>
 <a href="/">Back to List</a>
 {% endblock %}
+
+

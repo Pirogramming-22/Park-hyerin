@@ -14,10 +14,11 @@
     {% endfor %}
 </ul>
 
-<a href="{{ devtool.get_absolute_url }}/update/">Edit</a>
-<form action="{{ devtool.get_absolute_url }}/delete/" method="post" style="display:inline;">
+<a href="{% url 'devTools:update' pk=devtool.pk %}">Edit</a>
+<form action="{% url 'devTools:delete' pk=devtool.pk %}" method="post" style="display:inline;">
     {% csrf_token %}
     <button type="submit">Delete</button>
 </form>
 <a href="/devtools/">Back to List</a>
 {% endblock %}
+
