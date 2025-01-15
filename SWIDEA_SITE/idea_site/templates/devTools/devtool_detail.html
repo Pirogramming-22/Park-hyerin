@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ devtool.name }}</h1>
+<p><strong>Kind:</strong> {{ devtool.kind }}</p>
+<p><strong>Description:</strong> {{ devtool.content }}</p>
+
+<h2>Ideas using this DevTool:</h2>
+<ul>
+    {% for idea in devtool.idea_set.all %}
+    <li><a href="{{ idea.get_absolute_url }}">{{ idea.title }}</a></li>
+    {% empty %}
+    <li>No ideas are using this DevTool yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ devtool.get_absolute_url }}/update/">Edit</a>
+<form action="{{ devtool.get_absolute_url }}/delete/" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+<a href="/devtools/">Back to List</a>
+{% endblock %}

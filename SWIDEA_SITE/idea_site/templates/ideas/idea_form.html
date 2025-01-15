@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>아이디어 등록</h1>
+<h1>{% if form.instance.pk %}Edit Idea{% else %}New Idea{% endif %}</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn">등록</button>
+    <button type="submit">Save</button>
 </form>
-<a href="{% url 'idea_list' %}" class="btn">뒤로 가기</a>
 {% endblock %}

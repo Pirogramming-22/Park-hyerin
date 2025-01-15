@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>개발툴 등록</h1>
+<h1>{% if form.instance.pk %}Edit DevTool{% else %}New DevTool{% endif %}</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn">등록</button>
+    <button type="submit">Save</button>
 </form>
-<a href="{% url 'devtool_list' %}" class="btn">뒤로 가기</a>
+<a href="/devtools/">Back to List</a>
 {% endblock %}

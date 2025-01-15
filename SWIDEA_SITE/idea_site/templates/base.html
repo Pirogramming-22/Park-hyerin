@@ -1,30 +1,29 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {%block head%}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idea Site</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
     <header>
         <nav>
             <ul>
                 <li><a class="site_name">My <strong>SW Idea</strong> Manage</a></li>
-                <li><a href="{% url 'idea_list' %}">아이디어 관리</a></li>
-                <li><a href="{% url 'idea_add' %}">아이디어 등록</a></li>
-                <li><a href="{% url 'devtool_list' %}">개발툴 관리</a></li>
-                <li><a href="{% url 'devtool_add' %}">개발툴 등록</a></li>
+                <li><a href="/">아이디어 관리</a></li>
+                <li><a href="/create/">아이디어 등록</a></li>
+                <li><a href="/devtools/">개발툴 관리</a></li>
+                <li><a href="/devtools/create/">개발툴 등록</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        {% block content %} 
-        {% endblock %}
-    </main>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{% static 'ideas.js' %}"></script>
 </body>
 </html>
