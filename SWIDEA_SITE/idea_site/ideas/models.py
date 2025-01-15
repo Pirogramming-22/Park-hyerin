@@ -9,6 +9,7 @@ class Idea(models.Model):
     content = models.TextField()
     interest = models.IntegerField(default=0)
     devtool = models.ForeignKey('devTools.DevTool', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title

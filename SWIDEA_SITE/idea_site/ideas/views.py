@@ -1,26 +1,40 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.template.loader import render_to_string
 from .models import Idea, IdeaStar
 from .forms import IdeaForm
 
 # 메인페이지 - 아이디어 관리 리스트
 def idea_list(request):
-    ideas = Idea.objects.all().order_by('-id')
+    sort_by = request.GET.get('sort_by', 'title')
+
+    if sort_by == 'name':
+        ideas = Idea.objects.all().order_by('title')
+    elif sort_by == 'likes':
+        starred_ideas = IdeaStar.objects.select_related('idea').filter(idea__isnull=False).order_by('starred_at')
+        ideas = [starred.idea for starred in starred_ideas]
+    elif sort_by == 'created_at':
+        ideas = Idea.objects.all().order_by('created_at')
+    else:
+        ideas = Idea.objects.all().order_by('-created_at')
+
     paginator = Paginator(ideas, 4)
     page = request.GET.get('page')
     ideas = paginator.get_page(page)
-    
-    # 로그인 여부에 따른 찜 상태 확인
+
     for idea in ideas:
         if request.user.is_authenticated:
             idea.is_starred = IdeaStar.objects.filter(user=request.user, idea=idea).exists()
         else:
-            # 비로그인 사용자의 경우, 세션을 통해 찜 상태 확인
             star_key = f"starred_idea_{idea.id}"
             idea.is_starred = star_key in request.session
 
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return render(request, 'ideas/idea_list.html', {'ideas': ideas})  # 같은 템플릿으로 반환
+    
     return render(request, 'ideas/idea_list.html', {'ideas': ideas})
+
 
 # 아이디어 등록
 def idea_create(request):
@@ -82,7 +96,6 @@ def toggle_star(request, idea_id):
             IdeaStar.objects.create(user=user, idea=idea)
             is_starred = True
     else:
-        # 비로그인 사용자의 경우, 세션을 이용해서 찜 상태 관리
         star_key = f"starred_idea_{idea.id}"
 
         if star_key in request.session:
