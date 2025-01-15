@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from django.template.loader import render_to_string
 from .models import Idea, IdeaStar
 from .forms import IdeaForm
 
@@ -12,8 +11,7 @@ def idea_list(request):
     if sort_by == 'name':
         ideas = Idea.objects.all().order_by('title')
     elif sort_by == 'likes':
-        starred_ideas = IdeaStar.objects.select_related('idea').filter(idea__isnull=False)
-        ideas = starred_ideas.order_by('starred_at')
+        ideas = Idea.objects.filter(ideastar__isnull=False).order_by('ideastar__starred_at')
     elif sort_by == 'created_at':
         ideas = Idea.objects.all().order_by('created_at')
     else:
@@ -56,8 +54,8 @@ def idea_detail(request, pk):
     else:
         star_key = f"starred_idea_{idea.id}"
         is_starred = star_key in request.session
-
     return render(request, 'ideas/idea_detail.html', {'idea': idea, 'is_starred': is_starred})
+
 
 # 아이디어 수정
 def idea_update(request, pk):
@@ -101,6 +99,7 @@ def toggle_star(request, idea_id):
         if starred:
             IdeaStar.objects.filter(user=user, idea=idea).delete()
             is_starred = False
+            
         else:
             IdeaStar.objects.create(user=user, idea=idea)
             is_starred = True

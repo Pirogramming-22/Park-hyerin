@@ -57,6 +57,11 @@
                     } else {
                         $icon.removeClass('ri-star-fill').addClass('ri-star-line');
                     }
+
+                    if (window.location.pathname !== `/idea/${ideaId}/`) {
+                        location.reload(); // 디테일 페이지가 아니면 페이지를 새로고침
+                    }
+
                 },
                 error: function() {
                     alert("찜하기 처리 중 오류 발생");
@@ -78,6 +83,8 @@
                 headers: { "X-CSRFToken": "{{ csrf_token }}" }, 
 
                 success: function(response) {
+                    console.log(response);
+                    console.log($interestCount);
                     // 관심도 업데이트 후 DOM 수정
                     $interestCount.text(response.interest);
                 },
@@ -97,7 +104,6 @@
                 url: url.toString(),
                 method: "GET",
                 success: function(response) {
-                    console.log(response);
                     $('.idea-container').html($(response).find('.idea-container').html());  
                 },
                 error: function() {
