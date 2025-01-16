@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="formbox">
+    <h1>{% if form.instance.pk %}Idea Detail Update{% else %}Idea Register{% endif %}</h1>
+    <h3>{% if form.instance.pk %}아이디어 세부내용 수정 페이지 입니다. 아이디어를 구체화하거나 내용을 변경해 보아요.{% else %}아이디어 등록 페이지 입니다. 당신의 아이디어를 잊지 말고 기록하세요!{% endif %}</h3>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.title.label_tag }}<br>
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                {{ form.image.label_tag }}<br>
+                {{ form.image }}
+            </div>
+            <div class="form-group">
+                {{ form.content.label_tag }}<br>
+                {{ form.content }}
+            </div>
+            <div class="form-group">
+                {{ form.interest.label_tag }}<br>
+                {{ form.interest }}
+            </div>
+            <div class="form-group">
+                {{ form.devtool.label_tag }}<br>
+                {{ form.devtool }}
+            </div>
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}
