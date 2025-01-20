@@ -41,18 +41,6 @@ header {
     font-size: 25px;
     margin: 15px;
   }
-  p{
-    color: red;
-  }
-  .post__container .card-title {
-    width: 200px;
-  }
-  
-  .post__container .card-text {
-    width: 200px;
-    height: 50px;
-    overflow-y: auto;
-  }
   
   .main__container {
     flex-wrap: wrap;
@@ -64,11 +52,12 @@ header {
     flex-direction: row;
   }
   
-  .post__container {
+  .post {
     display: flex;
     flex-direction: column;
     margin: 20px;
     border-radius: 5px;
+    border-color: #FF6A88;
   }
    .card-body{
     margin: 15px;

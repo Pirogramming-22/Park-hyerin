@@ -4,14 +4,107 @@
 {% block content %}
     <div class="main__container">
         {% for post in posts %}
-            <div class="card post__container post-id-{{ post.id }}">
-                <div class="card-body">
-                    <div class="card-title">{{ post.title }}</div>
-                    <div class="card-text">{{ post.content}}</div>
-                    <div class="btn btn-primary post__like" onclick="onClickLike({{post.id}}, 'like')">Like {{ post.like }}</div>
-                    <div class="btn btn-primary post__dislike" onclick="onClickLike({{post.id}}, 'dislike')">Dislike {{ post.dislike }}</div>
+        <div class="post">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+            
+            <!-- 좋아요 버튼 -->
+            <span class="like" data-post-id="{{ post.id }}">
+                <i class="ri-heart-3-line {% if post.like_set.exists %}ri-heart-3-fill{% else %}ri-heart-3-line{% endif %}"></i>
+            </span>
+        
+            <!-- 댓글 버튼 -->
+            <span class="comment-toggle" data-post-id="{{ post.id }}">
+                <i class="fa fa-comment"></i>
+            </span>
+        
+            <div class="comments-section" id="comments-section-{{ post.id }}" style="display:none;">
+                <div class="comments-list">
+                    {% for comment in post.comment_set.all %}
+                        <div class="comment" data-comment-id="{{ comment.id }}">
+                            <p>{{ comment.content }}</p>
+                            <span class="delete-comment">삭제</span>
+                        </div>
+                    {% endfor %}
                 </div>
+                <textarea id="comment-input-{{ post.id }}" placeholder="댓글을 달아주세요..."></textarea>
+                <button class="add-comment" data-post-id="{{ post.id }}">댓글 작성</button>
             </div>
+        </div>
         {% endfor %}
-    </div>  ``
+    </div>  
+{% endblock %}
+
+
+{% block extra %}
+<script>
+    $(document).ready(function () {
+        // 좋아요 버튼 클릭 시
+        $('.like').click(function () {
+            var postId = $(this).data('post-id');
+            var icon = $(this).find('i');
+    
+            $.ajax({
+                url: '/toggle_like/' + postId + '/',
+                method: 'GET',
+                success: function (response) {
+                    if (response.liked) {
+                        icon.removeClass('ri-heart-3-line').addClass('ri-heart-3-fill');
+                    } else {
+                        icon.removeClass('ri-heart-3-fill').addClass('ri-heart-3-line');
+                    }
+                }
+            });
+        });
+    
+        // 댓글 버튼 클릭 시 댓글 창 열기
+        $('.comment-toggle').click(function () {
+            var postId = $(this).data('post-id');
+            $('#comments-section-' + postId).toggle();
+        });
+    
+        // 댓글 추가
+        $('.add-comment').click(function () {
+            var postId = $(this).data('post-id');
+            var content = $('#comment-input-' + postId).val();
+    
+            $.ajax({
+                url: '/comment-create/' + postId + '/',
+                method: 'POST',
+                data: {
+                    'content': content,
+                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+                },
+                success: function (response) {
+                    var newComment = '<div class="comment" data-comment-id="' + response.comment.id + '">';
+                    newComment += '<p>' + response.comment.content + '</p>';
+                    newComment += '<span class="delete-comment">삭제</span>';
+                    newComment += '</div>';
+    
+                    $('#comments-section-' + postId + ' .comments-list').append(newComment);
+                    $('#comment-input-' + postId).val('');
+                }
+            });
+        });
+    
+        // 댓글 삭제
+        $(document).on('click', '.delete-comment', function () {
+            var commentId = $(this).closest('.comment').data('comment-id');
+            
+            if (commentId) {  // commentId가 존재하는 경우에만 요청을 보냄
+                var self = $(this); 
+                $.ajax({
+                    url: '/comment-delete/' + commentId + '/',
+                    method: 'GET',
+                    success: function (response) {
+                        // 댓글 삭제 후 해당 댓글을 제거
+                        self.closest('.comment').remove();
+                    }
+                });
+            } else {
+                console.error('댓글 ID가 존재하지 않습니다.');
+            }
+        });
+    });
+</script>
 {% endblock %}

@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Like, Comment
 from .forms import PostForm
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-
 def post_list(request):
     posts = Post.objects.all()
     ctx = {
@@ -28,17 +29,34 @@ def post_new(request):
             'form' : form,
         }
         return render(request, 'main/post_new.html', ctx)
-    
-def like_toggle(request, post_id):
-    post = Post.objects.get(id=post_id)
-    like, created = Like.objects.get_or_create(post=post, user=request.user)
-    if not created:
-        like.delete()  # 이미 좋아요가 달렸으면 삭제
-    return JsonResponse({'liked': created, 'like_count': post.likes.count()})
 
-def comment_create(request, post_id):
-    post = Post.objects.get(id=post_id)
-    content = request.POST.get('content')
-    Comment.objects.create(post=post, user=request.user, content=content)
-    return JsonResponse({'comment_count': post.comments.count()})
+# 좋아요 상태 토글
+def toggle_like(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
     
+    # 이미 좋아요가 눌렸으면 좋아요 취소
+    like, created = Like.objects.get_or_create(post=post)
+    if not created:
+        like.delete()
+        liked = False
+    else:
+        liked = True
+
+    return JsonResponse({'liked': liked})
+
+# 댓글 추가
+@csrf_exempt
+def add_comment(request, post_id):
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        post = get_object_or_404(Post, id=post_id)
+        
+        comment = Comment.objects.create(post=post, content=content)
+        
+        return JsonResponse({'comment': comment.content, 'created_at': comment.created_at})
+
+# 댓글 삭제
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()
+    return JsonResponse({'message': 'Comment deleted successfully'})
