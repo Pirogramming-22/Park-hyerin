@@ -6,7 +6,6 @@
         {% for post in posts %}
             <div class="card post__container post-id-{{ post.id }}">
                 <div class="card-body">
-                    <img src="{{ card.image.url }}" alt="{{ card.title }}" class="thumbnail">
                     <div class="card-title">{{ post.title }}</div>
                     <div class="card-text">{{ post.content}}</div>
                     <div class="btn btn-primary post__like" onclick="onClickLike({{post.id}}, 'like')">Like {{ post.like }}</div>
@@ -14,28 +13,5 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
-{% endblock %}
-
-
-{% block extra %}
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-    const onClickLike = async(id, type) => {
-        const url = "/post_like/";
-        const { data } = await axios.post(url, {
-            id, 
-            type,
-        }); // {id: 1, type:  'like'}
-        likeHandleResponse(data.id, data.type);
-    }
-    const likeHandleResponse = (id, type) => {
-        const element = document.querySelector(`.post-id-${id} .post__${type}`);
-        const originHTML = element.innerHTML;
-        const [buttonType, num] = originHTML.split(" ");
-        const count = Number(num) + 1;
-
-        element.innerHTML = `${buttonType} ${count}`;
-    }
-</script>
+    </div>  ``
 {% endblock %}

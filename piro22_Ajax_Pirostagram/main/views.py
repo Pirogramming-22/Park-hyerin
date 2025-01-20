@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, Like, Comment
 from .forms import PostForm
 
 # Create your views here.
@@ -29,24 +29,16 @@ def post_new(request):
         }
         return render(request, 'main/post_new.html', ctx)
     
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-import json
-
-@csrf_exempt
-def post_like(request):
-    req = json.loads(request.body)
-    post_id = req['id']
-    button_type = req['type']
-
+def like_toggle(request, post_id):
     post = Post.objects.get(id=post_id)
+    like, created = Like.objects.get_or_create(post=post, user=request.user)
+    if not created:
+        like.delete()  # 이미 좋아요가 달렸으면 삭제
+    return JsonResponse({'liked': created, 'like_count': post.likes.count()})
 
-    if button_type == 'like':
-        post.like += 1
-
-    else:
-        post.dislike += 1
-
-    post.save()
-
-    return JsonResponse({'id':post_id, 'type':button_type})
+def comment_create(request, post_id):
+    post = Post.objects.get(id=post_id)
+    content = request.POST.get('content')
+    Comment.objects.create(post=post, user=request.user, content=content)
+    return JsonResponse({'comment_count': post.comments.count()})
+    
