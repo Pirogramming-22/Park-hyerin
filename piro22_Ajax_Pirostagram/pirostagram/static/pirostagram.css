@@ -148,7 +148,34 @@ header {
     border-radius: 5px;
     cursor: pointer;
 }
+.form__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+form {
+  width: 100%;
+  max-width: 500px;
+}
 
-table{
-  gap: 20px;
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 10px; 
+}
+
+td {
+  display: block;  
+  padding: 5px 0;
+}
+
+input[type="submit"] {
+  background-color: #FF6A88;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  margin:auto;
 }
