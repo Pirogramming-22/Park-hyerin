@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+    <a href="{% url 'main:post_list' %}" class="list"><strong>List</strong></a>
     <div class="form__container">
         <form action="" enctype="multipart/form-data" method="POST">
             {% csrf_token %}

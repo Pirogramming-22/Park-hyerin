@@ -2,33 +2,40 @@
 {% load static %}
 
 {% block content %}
+    <a href="{% url 'main:post_new' %}" class="upload"><strong>Upload</strong></a>
     <div class="main__container">
         {% for post in posts %}
-        <div class="post">
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-            
-            <!-- 좋아요 버튼 -->
-            <span class="like" data-post-id="{{ post.id }}">
-                <i class="ri-heart-3-line {% if post.like_set.exists %}ri-heart-3-fill{% else %}ri-heart-3-line{% endif %}"></i>
-            </span>
-        
-            <!-- 댓글 버튼 -->
-            <span class="comment-toggle" data-post-id="{{ post.id }}">
-                <i class="fa fa-comment"></i>
-            </span>
-        
-            <div class="comments-section" id="comments-section-{{ post.id }}" style="display:none;">
-                <div class="comments-list">
-                    {% for comment in post.comment_set.all %}
-                        <div class="comment" data-comment-id="{{ comment.id }}">
-                            <p>{{ comment.content }}</p>
-                            <span class="delete-comment">삭제</span>
-                        </div>
-                    {% endfor %}
+        <div class="post_container">
+            <div class="post-content">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content }}</p>
+                <P class="created_at">{{post.created_at}}</p>
+            </div>
+            <div class="like-comment">
+                <div class="icons"> 
+                    <!-- 좋아요 버튼 -->
+                    <span class="like" data-post-id="{{ post.id }}">
+                        <i class="ri-heart-3-line {% if post.like_set.exists %}ri-heart-3-fill{% else %}ri-heart-3-line{% endif %}"></i>
+                    </span>
+                
+                    <!-- 댓글 버튼 -->
+                    <span class="comment-toggle" data-post-id="{{ post.id }}">
+                        <i class="ri-chat-1-fill"></i>
+                    </span>
                 </div>
-                <textarea id="comment-input-{{ post.id }}" placeholder="댓글을 달아주세요..."></textarea>
-                <button class="add-comment" data-post-id="{{ post.id }}">댓글 작성</button>
+            
+                <div class="comments-section" id="comments-section-{{ post.id }}" style="display:none;">
+                    <div class="comments-list">
+                        {% for comment in post.comment_set.all %}
+                            <div class="comment" data-comment-id="{{ comment.id }}">
+                                <p>{{ comment.content }}</p>
+                                <span class="delete-comment">삭제</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <textarea id="comment-input-{{ post.id }}" placeholder="댓글을 달아주세요..."></textarea>
+                    <button class="add-comment" data-post-id="{{ post.id }}">댓글 작성</button>
+                </div>
             </div>
         </div>
         {% endfor %}

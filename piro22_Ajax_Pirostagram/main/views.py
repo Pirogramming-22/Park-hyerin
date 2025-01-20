@@ -53,8 +53,14 @@ def add_comment(request, post_id):
         
         comment = Comment.objects.create(post=post, content=content)
         
-        return JsonResponse({'comment': comment.content, 'created_at': comment.created_at})
-
+        return JsonResponse({
+            'comment': {
+                'id': comment.id,
+                'content': comment.content,
+                'created_at': comment.created_at
+            }
+        })
+    
 # 댓글 삭제
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
