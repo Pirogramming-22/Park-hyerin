@@ -1,0 +1,15 @@
+{% extends 'pirostagram.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="form__container">
+        <form action="" enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+
+            <input type="submit" value="submit">
+        </form>
+    </div>
+{% endblock %}
